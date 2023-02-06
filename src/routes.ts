@@ -8,6 +8,7 @@ import {
 } from "./schema/product.schema";
 import validateResource from "./middleware/validateResource";
 import requireUser from "./middleware/requireUser";
+import isAdmin from "./middleware/isAdmin";
 import { createUserHandler } from "./controller/user.controller";
 import {
   createUserSessionHandler,
@@ -36,7 +37,7 @@ function routes(app: Express) {
   //product routes
   app.post(
     "/api/product",
-    [requireUser, validateResource(createProductSchema)],
+    [requireUser, isAdmin, validateResource(createProductSchema)],
     createProductHandler
   );
   app.put(

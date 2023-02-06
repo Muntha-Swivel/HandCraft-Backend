@@ -5,6 +5,7 @@ import config from "config";
 export interface UserInput {
   email: string;
   name: string;
+  isAdmin: boolean;
   password: string;
 }
 
@@ -18,6 +19,7 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
+    isAdmin: { type: Boolean, required: true, default: false },
     password: { type: String, required: true },
   },
   {

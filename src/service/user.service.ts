@@ -2,7 +2,7 @@ import { FilterQuery } from "mongoose";
 import { omit } from "lodash";
 import UserModel, { UserDocument, UserInput } from "../models/user.model";
 
-const createUser = async (input: UserInput) => {
+const createUser = async (input: Omit<UserInput, "isAdmin">) => {
   try {
     const user = await UserModel.create(input);
 
