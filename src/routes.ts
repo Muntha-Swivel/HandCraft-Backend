@@ -1,6 +1,11 @@
 import { Express, Request, Response } from "express";
 import { createUserSchema } from "./schema/user.schema";
 import { createSessionSchema } from "./schema/session.schema";
+import {
+  createProductSchema,
+  updateProductSchema,
+  deleteProductSchema,
+} from "./schema/product.schema";
 import validateResource from "./middleware/validateResource";
 import requireUser from "./middleware/requireUser";
 import { createUserHandler } from "./controller/user.controller";
@@ -9,6 +14,11 @@ import {
   getUserSessionsHandler,
   deleteSessionHandler,
 } from "./controller/session.controller";
+import {
+  createProductHandler,
+  updateProductHandler,
+  deleteProductHandler,
+} from "./controller/product.controller";
 
 function routes(app: Express) {
   app.get("/", (req: Request, res: Response) => {
@@ -22,5 +32,22 @@ function routes(app: Express) {
   );
   app.get("/api/sessions", requireUser, getUserSessionsHandler);
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
+
+  //product routes
+  app.post(
+    "/api/product",
+    [requireUser, validateResource(createProductSchema)],
+    createProductHandler
+  );
+  app.put(
+    "/api/product/:productId",
+    [requireUser, validateResource(updateProductSchema)],
+    updateProductHandler
+  );
+  app.delete(
+    "/api/product/:productId",
+    [requireUser, validateResource(deleteProductSchema)],
+    deleteProductHandler
+  );
 }
 export default routes;
