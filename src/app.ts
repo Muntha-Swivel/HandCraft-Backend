@@ -3,7 +3,7 @@ import connect from "./utils/connect";
 import log from "./utils/logger";
 import createServer from "./utils/server";
 import routes from "./routes";
-import deserializeUser from "./middleware/deSerealizeUser";
+import deserializeUser from "./middleware/deserealizeUser";
 //import swaggerUi from "swagger-ui-express";
 
 //const swaggerDocs = require("../swagger.json");

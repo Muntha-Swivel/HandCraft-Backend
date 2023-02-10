@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "build": "tsc && cp swagger.json build ",
+    "build": "tsc",
     "test": "jest",
     "start": "node build/src/app.js"
   },
@@ -25,6 +25,7 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/body-parser": "^1.19.2",
     "@types/config": "^3.3.0",
     "@types/cors": "^2.8.13",
