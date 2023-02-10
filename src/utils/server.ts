@@ -7,6 +7,15 @@ const createServer = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cors());
+  app.use(
+    cors({
+      origin: [
+        "https://handcraft-git-main-muntha-swivel.vercel.app/",
+        "http://localhost:300",
+      ],
+      credentials: true,
+    })
+  );
 
   return app;
 };
