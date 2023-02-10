@@ -9,7 +9,7 @@ const createServer = () => {
   // app.use(cors());
   app.use(
     cors({
-      origin: ["http://localhost:3000"],
+      origin: ["https://handcraft-git-main-muntha-swivel.vercel.app/"],
       credentials: true,
     })
   );
