@@ -1,4 +1,7 @@
 import { object, number, string, TypeOf } from "zod";
+import mongoose from "mongoose";
+
+type ProductId = typeof mongoose.Schema.Types.ObjectId;
 
 const payload = {
   body: object({
@@ -7,7 +10,7 @@ const payload = {
     }),
     description: string({
       required_error: "Description is required",
-    }).min(20, "Description should be at least 120 characters long"),
+    }).min(10, "Description should be at least 10 characters long"),
     price: number({
       required_error: "Price is required",
     }),

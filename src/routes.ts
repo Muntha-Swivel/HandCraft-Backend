@@ -6,6 +6,7 @@ import {
   updateProductSchema,
   deleteProductSchema,
 } from "./schema/product.schema";
+import { createOrderSehema } from "./schema/order.schema";
 import validateResource from "./middleware/validateResource";
 import requireUser from "./middleware/requireUser";
 import isAdmin from "./middleware/isAdmin";
@@ -16,16 +17,23 @@ import {
   deleteSessionHandler,
 } from "./controller/session.controller";
 import {
+  getAllProductHandler,
+  getProductHandler,
   createProductHandler,
   updateProductHandler,
   deleteProductHandler,
 } from "./controller/product.controller";
+import { createOrderHandler } from "./controller/order.controller";
 
 function routes(app: Express) {
   app.get("/", (req: Request, res: Response) => {
-    res.send("hello world").status(200);
+    res.send("hello world Dude!").status(200);
   });
+
+  //user
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
+
+  //sessions
   app.post(
     "/api/sessions",
     validateResource(createSessionSchema),
@@ -35,6 +43,8 @@ function routes(app: Express) {
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
   //product routes
+  app.get("/api/product", getAllProductHandler);
+  app.get("/api/product/:productId", getProductHandler);
   app.post(
     "/api/product",
     [requireUser, isAdmin, validateResource(createProductSchema)],
@@ -49,6 +59,13 @@ function routes(app: Express) {
     "/api/product/:productId",
     [requireUser, validateResource(deleteProductSchema)],
     deleteProductHandler
+  );
+
+  //order routes
+  app.post(
+    "/api/order",
+    [requireUser, validateResource(createOrderSehema)],
+    createOrderHandler
   );
 }
 export default routes;

@@ -14,7 +14,6 @@ const deserializeUser = async (
   );
 
   const refreshToken = get(req, "headers.x-refresh", "");
-  console.log(refreshToken);
 
   if (!accessToken) {
     return next();
@@ -24,7 +23,6 @@ const deserializeUser = async (
 
   if (decoded) {
     res.locals.user = decoded;
-    console.log(decoded);
     return next();
   }
 

@@ -13,7 +13,7 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   const user = await validatePassword(req.body);
 
   if (!user) {
-    return res.status(401).send("Invalid email or password");
+    return res.status(401).send({ message: "Invalid email or password" });
   }
 
   // create a session
@@ -31,6 +31,13 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   );
 
   // return access & refresh tokens
+  res.cookie("accessToken", accessToken, {
+    maxAge: 300000, // 5 minutes
+  });
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 300000, // 5 minutes
+    httpOnly: true,
+  });
 
   return res.send({ accessToken, refreshToken });
 };

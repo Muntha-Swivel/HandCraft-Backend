@@ -4,35 +4,52 @@ import ProductModel, {
   ProductInput,
 } from "../models/product.model";
 
-export async function createProduct(input: ProductInput) {
+const createProduct = async (input: Omit<ProductInput, "sold">) => {
   try {
     const result = await ProductModel.create(input);
     return result;
   } catch (e) {
     throw e;
   }
-}
+};
 
-export async function findProduct(
+const findProduct = async (
   query: FilterQuery<ProductDocument>,
   options: QueryOptions = { lean: true }
-) {
+) => {
   try {
     const result = await ProductModel.findOne(query, {}, options);
     return result;
   } catch (e) {
     throw e;
   }
-}
+};
 
-export async function findAndUpdateProduct(
+const findAllProduct = async () => {
+  try {
+    const result = ProductModel.find();
+    return result;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const findAndUpdateProduct = (
   query: FilterQuery<ProductDocument>,
   update: UpdateQuery<ProductDocument>,
   options: QueryOptions
-) {
+) => {
   return ProductModel.findOneAndUpdate(query, update, options);
-}
+};
 
-export async function deleteProduct(query: FilterQuery<ProductDocument>) {
+const deleteProduct = async (query: FilterQuery<ProductDocument>) => {
   return ProductModel.deleteOne(query);
-}
+};
+
+export {
+  createProduct,
+  findProduct,
+  findAndUpdateProduct,
+  deleteProduct,
+  findAllProduct,
+};
