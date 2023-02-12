@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Employee Management Backend",
+    "description": "A simple application with CRUD operation",
+    "version": "0.1.9"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api",
+      "description": "Dev Server"
+    }
+  ],
+
+  "paths": {
+    "/product": {
+      "get": {
+        "summary": "Returns a list of products",
+        "responses": {
+          "200": {
+            "description": "A json array of products"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new product",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The JSON token for authorization"
+          }
+        ],
+        "requestBody": {
+          "description": "Adding a new product",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "created"
+          }
+        }
+      }
+    },
+    "/product/{id}": {
+      "get": {
+        "summary": "Returns a single product",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "product id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "update a product",
+        "requestBody": {
+          "description": "Adding a new product",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "product id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete a product",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "product id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "product": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "image": {
+            "type": "string"
+          }
+        },
+        "required": ["title", "description", "price", "image"]
+      }
+    }
+  }
+}

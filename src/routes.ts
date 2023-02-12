@@ -52,12 +52,12 @@ function routes(app: Express) {
   );
   app.put(
     "/api/product/:productId",
-    [requireUser, validateResource(updateProductSchema)],
+    [requireUser, isAdmin, validateResource(updateProductSchema)],
     updateProductHandler
   );
   app.delete(
     "/api/product/:productId",
-    [requireUser, validateResource(deleteProductSchema)],
+    [requireUser, isAdmin, validateResource(deleteProductSchema)],
     deleteProductHandler
   );
 
