@@ -1,12 +1,11 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+//import router from "../routes";
 
 const createServer = () => {
   const app = express();
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(cookieParser());
 
   const corsOptions = {
     origin: "https://handcraft.vercel.app",
@@ -14,6 +13,17 @@ const createServer = () => {
     optionSuccessStatus: 200,
   };
   app.use(cors(corsOptions));
+
+  app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://handcraft.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+  });
 
   return app;
 };
