@@ -19,6 +19,7 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   // create a session
   const session = await createSession(user._id, req.get("user-agent") || "");
 
+  console.log("after create session");
   // create an access token
   const accessToken = signJwt(
     { ...user, session: session._id },
@@ -30,6 +31,7 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
     { expiresIn: "1y" }
   );
 
+  console.log("after createating tokens");
   // return access & refresh tokens
   // res.cookie("accessToken", accessToken, {
   //   maxAge: 300000, // 5 minutes
