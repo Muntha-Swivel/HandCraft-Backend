@@ -10,6 +10,8 @@ const createServer = () => {
   const whitelist = ["https://handcraft.vercel.app", "http://localhost:3000"];
 
   const corsOptions = {
+    credentials: true,
+
     origin: (origin: any, callback: any) => {
       if (whitelist.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
@@ -17,6 +19,7 @@ const createServer = () => {
         callback(new Error("Not allowed by CORS"));
       }
     },
+
     optionsSuccessStatus: 200,
   };
 
