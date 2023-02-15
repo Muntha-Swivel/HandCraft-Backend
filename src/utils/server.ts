@@ -8,9 +8,12 @@ const createServer = () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 
-  app.use(cors({ credentials: true, origin: true }));
-
-  console.log("cors working");
+  const corsOptions = {
+    origin: "https://handcraft.vercel.app",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+  };
+  app.use(cors(corsOptions));
 
   return app;
 };

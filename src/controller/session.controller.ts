@@ -38,7 +38,6 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   });
   res.cookie("refreshToken", refreshToken, {
     maxAge: 300000, // 5 minutes
-    httpOnly: true,
     sameSite: "none",
     secure: true,
   });
