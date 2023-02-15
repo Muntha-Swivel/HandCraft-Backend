@@ -15,6 +15,8 @@ const createServer = () => {
   };
   app.use(cors(corsOptions));
 
+  console.log("cors working");
+
   return app;
 };
 
