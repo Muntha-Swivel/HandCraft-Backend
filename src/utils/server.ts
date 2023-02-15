@@ -11,6 +11,7 @@ const createServer = () => {
     origin: "https://handcraft.vercel.app",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
+    preflightContinue: true,
   };
   app.use(cors(corsOptions));
 
