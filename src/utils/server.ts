@@ -9,7 +9,7 @@ const createServer = () => {
   app.use(cookieParser());
 
   const corsOptions = {
-    origin: "https://handcraft.vercel.app/",
+    origin: "https://handcraft.vercel.app",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   };
