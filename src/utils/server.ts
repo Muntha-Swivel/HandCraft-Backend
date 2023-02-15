@@ -7,23 +7,14 @@ const createServer = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  const whitelist = ["https://handcraft.vercel.app", "http://localhost:3000"];
-
   const corsOptions = {
-    credentials: true,
-
-    origin: (origin: any, callback: any) => {
-      if (whitelist.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-
-    optionsSuccessStatus: 200,
+    origin: "https://handcraft.vercel.app",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+    preflightContinue: true,
   };
-
   app.use(cors(corsOptions));
+
   return app;
 };
 

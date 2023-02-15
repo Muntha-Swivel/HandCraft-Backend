@@ -31,17 +31,17 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   );
 
   // return access & refresh tokens
-  res.cookie("accessToken", accessToken, {
-    maxAge: 300000, // 5 minutes
-    sameSite: "none",
-    secure: true,
-  });
-  res.cookie("refreshToken", refreshToken, {
-    maxAge: 300000, // 5 minutes
-    sameSite: "none",
-    secure: true,
-  });
-  res.setHeader("Access-Control-Allow-Origin", "https://handcraft.vercel.app");
+  // res.cookie("accessToken", accessToken, {
+  //   maxAge: 300000, // 5 minutes
+  //   sameSite: "none",
+  //   secure: true,
+  // });
+  // res.cookie("refreshToken", refreshToken, {
+  //   maxAge: 300000, // 5 minutes
+  //   sameSite: "none",
+  //   secure: true,
+  // });
+  // res.setHeader("Access-Control-Allow-Origin", "https://handcraft.vercel.app");
 
   return res.send({ accessToken, refreshToken });
 };
