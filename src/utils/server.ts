@@ -8,23 +8,11 @@ const createServer = () => {
   app.use(express.urlencoded({ extended: true }));
 
   const corsOptions = {
-    origin: "https://handcraft.vercel.app",
-    credentials: true, //access-control-allow-credentials:true
+    origin: "http://localhost:3000",
     optionSuccessStatus: 200,
     preflightContinue: true,
   };
   app.use(cors(corsOptions));
-
-  app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://handcraft.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  });
 
   return app;
 };
