@@ -41,6 +41,7 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
     sameSite: "none",
     secure: true,
   });
+  res.setHeader("Access-Control-Allow-Origin", "https://handcraft.vercel.app");
 
   return res.send({ accessToken, refreshToken });
 };
