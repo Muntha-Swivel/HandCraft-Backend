@@ -11,7 +11,7 @@
       "description": "Dev Server"
     },
     {
-      "url": "https://jwelcraft.herokuapp.com",
+      "url": "https://jwelcraft.herokuapp.com/api",
       "description": "Producttion Server"
     }
   ],
