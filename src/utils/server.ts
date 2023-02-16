@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
-//import router from "../routes";
+import deserializeUser from "../middleware/deserealizeUser";
+import routes from "../routes";
+import config from "config";
 
 const createServer = () => {
   const app = express();
@@ -8,12 +10,14 @@ const createServer = () => {
   app.use(express.urlencoded({ extended: true }));
 
   const corsOptions = {
-    origin: "https://handcraft.vercel.app",
+    origin: config.get<string>("frontEndUrl"),
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
     preflightContinue: true,
   };
   app.use(cors(corsOptions));
+  app.use(deserializeUser);
+  routes(app);
 
   return app;
 };

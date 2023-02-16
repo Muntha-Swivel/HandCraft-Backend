@@ -5,6 +5,7 @@ import {
   createProductSchema,
   updateProductSchema,
   deleteProductSchema,
+  getProductSchema,
 } from "./schema/product.schema";
 import { createOrderSehema } from "./schema/order.schema";
 import validateResource from "./middleware/validateResource";
@@ -44,7 +45,11 @@ function routes(app: Express) {
 
   //product routes
   app.get("/api/product", getAllProductHandler);
-  app.get("/api/product/:productId", getProductHandler);
+  app.get(
+    "/api/product/:productId",
+    validateResource(getProductSchema),
+    getProductHandler
+  );
   app.post(
     "/api/product",
     [requireUser, isAdmin, validateResource(createProductSchema)],

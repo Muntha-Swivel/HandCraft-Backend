@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Employee Management Backend",
+    "title": "CraftJwel Backend",
     "description": "A simple application with CRUD operation",
     "version": "0.1.9"
   },
@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:8080/api",
       "description": "Dev Server"
+    },
+    {
+      "url": "https://jwelcraft.herokuapp.com",
+      "description": "Producttion Server"
     }
   ],
 
@@ -33,6 +37,11 @@
               "type": "string"
             },
             "description": "The JSON token for authorization"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -122,6 +131,48 @@
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "summary": "Add a new user",
+        "requestBody": {
+          "description": "Adding a new user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "created"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "summary": "Login",
+        "requestBody": {
+          "description": "Login",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully"
+          }
+        }
+      }
     }
   },
 
@@ -143,6 +194,34 @@
           }
         },
         "required": ["title", "description", "price", "image"]
+      },
+      "user": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "email", "password", "confirmPassword"]
+      },
+      "userLogin": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "password"]
       }
     }
   }

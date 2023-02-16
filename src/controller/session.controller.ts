@@ -23,7 +23,7 @@ const createUserSessionHandler = async (req: Request, res: Response) => {
   // create an access token
   const accessToken = signJwt(
     { ...user, session: session._id },
-    { expiresIn: "15m" }
+    { expiresIn: "1d" }
   );
 
   const refreshToken = signJwt(
